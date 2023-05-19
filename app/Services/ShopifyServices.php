@@ -63,13 +63,13 @@ class ShopifyServices
 
     public function getCollection()
     {
-        $request = $this->client->request('GET', 'https://' . $this->store . '/admin/api/2023-04/smart_collections.json', [
+        $response = $this->client->request('GET', 'https://' . $this->store . '/admin/api/2023-04/smart_collections.json', [
             'headers' => [
                 'Content-Type' => 'application/json',
                 'X-Shopify-Access-Token' => $this->password
             ]
         ]);
 
-        return json_decode($request->getBody(), true);
+        return json_decode($response->getBody(), true);
     }
 }
