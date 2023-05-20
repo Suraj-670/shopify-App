@@ -1,4 +1,4 @@
-<div class="row" id="item-lists">
+<div class="row">
     @foreach ($products as $product)
         <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
             <div class="properties pb-30">
@@ -14,4 +14,12 @@
             </div>
         </div>
     @endforeach
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="organ_pagination text-center">
+            {!! $products->links('pages.pagination') !!}
+        </div>
+    </div>
 </div>

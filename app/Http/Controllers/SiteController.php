@@ -12,18 +12,14 @@ class SiteController extends Controller
     {
         $products = Product::paginate(30);
         $collections = Collection::all();
-        return view('welcome')->with(compact('products', 'collections'));
-    }
-
-    public function getProductByCollection(Request $request)
-    {
-        if ($request->product_type == '0') {
-            $products = Product::paginate(30);
-        } else {
-            $products = Product::where('product_type', $request->product_type)->paginate(30);
+        if ($request->ajax()) {
+            if (!$request->collection) {
+                $products = Product::paginate(20);
+            } else {
+                $products = Product::where('product_type', $request->collection)->paginate(20);
+            }
+            return view('pages.products', compact('products'));
         }
-        $selectedType = $request->product_type;
-        $collections = Collection::all();
-        return view('pages.products')->with(compact('products', 'collections', 'selectedType'));
+        return view('welcome')->with(compact('products', 'collections'));
     }
 }
